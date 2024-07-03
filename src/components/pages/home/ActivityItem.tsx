@@ -1,7 +1,6 @@
 'use client'
 
 import IconButton from "@/components/global/IconButton";
-import prisma from "@/db";
 import { useState } from "react";
 
 type Activity = {
@@ -27,6 +26,7 @@ function ActivityItem ({activity, removeActivity}: ActivityItemProps) {
       >
         <h2>{activity.location}</h2>
         <p>{activity.duration}</p>
+        <p>{activity.createdAt.toLocaleString('GB')}</p>
         <IconButton handleClick={() => {removeActivity(activity.id)}}/>
       </li>
     );

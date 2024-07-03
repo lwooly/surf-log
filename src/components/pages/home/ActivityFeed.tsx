@@ -1,18 +1,5 @@
-import prisma from "@/db";
 import ActivityItem from "./ActivityItem";
-
-const getActivities = async () => {
-    return await prisma.activity.findMany();
-}
-
-const removeActivity = async (id:number) => {
-    "use server"
-    await prisma.activity.delete({
-        where: {
-          id: id,
-        },
-      })
-}
+import { getActivities, removeActivity } from "@/actions/activities.actions";
 
 export default async function ActivityFeed() {
     const activities = await getActivities()

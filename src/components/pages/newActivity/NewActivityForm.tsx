@@ -3,13 +3,14 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { createActivity } from '@/actions/activities.actions';
 
 const schema = z.object({
   location: z.string().min(1, { message: 'Required' }),
   duration: z.number(),
 });
 
-const NewActivityForm = ({createActivity}) => {
+const NewActivityForm = () => {
   const {
     register,
     handleSubmit,
@@ -23,12 +24,12 @@ const NewActivityForm = ({createActivity}) => {
       <form className="flex flex-col gap-4" action={createActivity}>
         <label className='flex gap-4'>
           <p>Location</p>
-          <input className='border-2 border-slate-800 rounded' {...register('location')} />
+          <input className='border-2 border-slate-800 rounded' {...register('location')} placeholder='Location'/>
           {errors.location?.message && <p>{errors.location?.message}</p>}
         </label>
         <label className='flex gap-4'>
           <p>Duration</p>
-        <input className='border-2 border-slate-800 rounded' type="number" {...register('duration', { valueAsNumber: true })} />
+        <input className='border-2 border-slate-800 rounded' type="number" {...register('duration', { valueAsNumber: true })} placeholder='Duration' />
         {errors.duration?.message && <p>{errors.duration?.message}</p>}
         </label>
         <button type="submit">Create</button>
